@@ -1,80 +1,72 @@
-<!DOCTYPE html>
 <html>
 <head>
-   <title>TABEL</title>
-<style type="text/css">
-    thead
-    {
-        background-color:yellow;
-    }
-    tbody
-    {
-        background-color:pink;
-    }
-    tfoot
-    {
-        background-color:yellow;
-    }
-</style>
+    <title>Finalpweb</title>
 </head>
-<body bgcolor="PINK">
-<center><h1>- Tabel Pemesanan Makanan -</h1></center>
-<table border="1" cellpadding="10">
-     <table align="center" style="width:70%" bgcolor="gainsboro" cellpadding="17">
-    <center>
-    <thead>
-    <tr>
-        <th>No</th>
-        <th>Nama Makanan</th>
-        <th>Harga Satuan</th>
-        <th>Jumlah</th>
-        <th>Total</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>1</td>
-        <td>Sushi</td>
-        <td>Rp 6.000</td></center>
-        <td>7</td>
-        <td>Rp.42000</td>
-    </tr>
-    <tr>
-        <td>2</td>
-        <td>pizza</td>
-        <td>Rp 60000</td>
-        <td>2</td>
-        <td>Rp.120000</td>
-    </tr>
-    <tr>
-        <td>3</td>
-        <td>burger</td>
-        <td>Rp 12000</td>
-        <td>2</td>
-        <td>Rp.24000</td>
-    </tr>
-    <tr>
-        <td>4</td>
-        <td>Sate Taichan</td>
-        <td>Rp 15000</td>
-        <td>3</td>
-        <td>Rp.45000</td>
-    </tr>
-    <tr>
-        <td>5</td>
-        <td>Salted Egg Cheesetart</td>
-        <td>Rp 10000</td>
-        <td>2</td>
-        <td>Rp.20000</td>
-    </tr>
-    </tbody>
-    <tfoot>
-    <tr>
-        <td>Total</td>
-        <td colspan="4" style="text-align:right;">Rp. 296.000,-</td>
-    </tr>
-    </tfoot>
-    </center>
-</table>
+<body bgcolor="#A9A9A9">
+    <h3>Form Transaksi Penjualan Makanan</h3>
+    <form  method="POST">
+        <table>
+            <tr>
+                <td>Nama Barang</td>
+                <td>:</td>
+                <td><input type="text" name="nama"></td>
+            </tr>
+            <tr>
+                <td>Harga</td>
+                <td>:</td>
+                <td><input type="text" name="harga"></td>
+            </tr>
+            <tr>
+                <td>Jumlah Item Barang</td>
+                <td>:</td>
+                <td>
+                    <select name="qty">
+                        <option value="">Jumlah</option>
+                        <?php
+                            for($x=1;$x<=50;$x++){
+                        ?>
+                        <option value="<?php echo $x; ?>"><?php echo $x; ?></option>
+                        <?php
+                            }
+                        ?>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>
+                    <input type="submit" name="hitung" value="Hitung">
+                    <input type="reset" name="reset" value="Reset">
+                </td>
+            </tr>
+        </table>
+    </form>
+    <hr />
+    <h3>Hasil :</h3>
+    <?php
+    if(isset($_POST['hitung'])){
+        $nama    =$_POST['nama'];
+        $harga    =$_POST['harga'];
+        $qty    =$_POST['qty'];
+        $total    =$harga*$qty;
+        echo "
+            <table border='1' cellpadding='4'>
+                <tr>
+                    <td>Nama Barang</td>
+                    <td>Harga</td>
+                    <td>Banyaknya</td>
+                    <td>Total Harga</td>
+                </tr>
+                <tr>
+                    <td>$nama</td>
+                    <td align='right'>";echo number_format($harga,0,',','.');echo "</td>
+                    <td align='right'>";echo number_format($qty,0,',','.');echo "</td>
+                    <td align='right'>";echo number_format($total,0,',','.');echo "</td>
+                </tr>
+            </table>
+        ";
+    }
+?>
 </body>
 </html>
